@@ -7,3 +7,131 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+    color: #202124;
+}
+
+.navbar {
+    height: 64px;
+    background: white;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    width: 220px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.search-container {
+    flex: 1;
+}
+
+.search-input {
+    width: 60%;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #f1f3f4;
+    font-size: 15px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e8eaed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-body {
+    display: flex;
+}
+
+.sidebar {
+    width: 220px;
+    min-height: calc(100vh - 64px);
+    background: white;
+    padding: 20px;
+}
+
+.new-button {
+    padding: 14px 25px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 25px;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-menu a {
+    padding: 12px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 6px;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+    background: #e8f0fe;
+}
+
+.main-content {
+    flex: 1;
+    padding: 30px;
+}
+
+.drive-header h1 {
+    margin-top: 0;
+}
+
+.folder-grid {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 35px;
+}
+
+.folder-card {
+    width: 180px;
+    padding: 20px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.file-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.file-table th,
+.file-table td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.file-table th {
+    font-weight: 600;
+}

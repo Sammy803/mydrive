@@ -14,10 +14,10 @@
 
     <div class="user-profile">
         <div class="avatar">
-            U
+            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
         </div>
 
-        <span>User</span>
+        <span>{{ auth()->user()->name }}</span>
     </div>
 
 </header>

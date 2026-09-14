@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\Drive\DriveController;
+use App\Http\Controllers\Drive\FileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', function () {
@@ -21,6 +22,15 @@ Route::post('/logout', [GoogleAuthController::class, 'logout'])
 
 // Route::get('/', [DriveController::class, 'index'])
 //     ->name('drive.index');
-Route::get('/', [DriveController::class, 'index'])
-    ->middleware('auth')
-    ->name('drive.index');
+Route::middleware('auth')->group(function () {
+
+    Route::get('/', [DriveController::class, 'index'])
+        ->name('drive.index');
+
+    Route::get('/drive/search', [DriveController::class, 'search'])
+        ->name('drive.search');
+
+    Route::post('/drive/files', [FileController::class, 'store'])
+        ->name('drive.files.store');
+
+});

@@ -22,6 +22,7 @@ class GoogleAuthController extends Controller
                 'openid',
                 'profile',
                 'email',
+                'https://www.googleapis.com/auth/drive',
             ])
             ->with([
                 'access_type' => 'offline',

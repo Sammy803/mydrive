@@ -135,5 +135,67 @@ class GoogleDriveService
             ]
         );
     }
+
+    public function createFolder(string $name,?string $parentFolderId = null): DriveFile {
+
+        $metadata = new DriveFile([
+            'name' => $name,
+            'mimeType' => 'application/vnd.google-apps.folder',
+        ]);
+
+        if ($parentFolderId) {
+            $metadata->setParents([$parentFolderId]);
+        }
+
+        return $this->drive->files->create(
+            $metadata,
+            [
+                'fields' => 'id,name,mimeType,parents',
+            ]
+        );
+    }  
+    
+    public function deleteFile(string $fileId): void
+    {
+        $this->drive->files->delete($fileId);
+    }
+
+    public function renameFile(
+    string $fileId,
+    string $newName
+    ): DriveFile {
+
+        $metadata = new DriveFile([
+            'name' => $newName,
+        ]);
+
+        return $this->drive->files->update(
+            $fileId,
+            $metadata,
+            [
+                'fields' => 'id,name,mimeType,modifiedTime',
+            ]
+        );
+    }
+
+    public function shareFile(
+    string $fileId,
+    string $email
+    ): void {
+
+    $permission = new \Google\Service\Drive\Permission([
+        'type' => 'user',
+        'role' => 'writer',
+        'emailAddress' => $email,
+    ]);
+
+    $this->drive->permissions->create(
+        $fileId,
+        $permission,
+        [
+            'sendNotificationEmail' => true,
+        ]
+    );
+    }
     
 }

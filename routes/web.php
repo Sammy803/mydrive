@@ -34,3 +34,21 @@ Route::middleware('auth')->group(function () {
         ->name('drive.files.store');
 
 });
+
+Route::post('/drive/folders', [FileController::class, 'createFolder'])
+    ->name('drive.folders.store');
+
+Route::delete(
+    '/drive/files/{fileId}',
+    [FileController::class, 'destroy']
+)->name('drive.files.destroy');
+
+Route::patch(
+    '/drive/files/{fileId}/rename',
+    [FileController::class, 'rename']
+)->name('drive.files.rename');
+
+Route::post(
+    '/drive/files/{fileId}/share',
+    [FileController::class, 'share']
+)->name('drive.files.share');

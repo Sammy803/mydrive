@@ -28,6 +28,12 @@
 
 @endif
 
+@if($errors->any())
+    <div class="error-message">
+        {{ $errors->first() }}
+    </div>
+@endif
+
 
 <div class="upload-section">
 
@@ -61,6 +67,32 @@
 
 </div>
 
+
+<form
+    method="POST"
+    action="{{ route('drive.folders.store') }}"
+>
+    @csrf
+
+    <input
+        type="text"
+        name="name"
+        placeholder="New folder name"
+        required
+    >
+
+    @if($folderId)
+        <input
+            type="hidden"
+            name="parent_folder_id"
+            value="{{ $folderId }}"
+        >
+    @endif
+
+    <button type="submit">
+        Create Folder
+    </button>
+</form>
 
 <div class="files-section">
 
@@ -118,6 +150,74 @@
 
                 <td>
                     {{ $file->getModifiedTime() }}
+                </td>
+
+                <td>
+
+                    @if(!$isFolder && $file->getWebViewLink())
+
+                    <a
+                        href="{{ $file->getWebViewLink() }}"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        Open
+                    </a>
+
+                    @endif
+                    
+                    <form
+                    method="POST"
+                    action="{{ route('drive.files.destroy', $file->getId()) }}"
+                    style="display:inline;"
+                    onsubmit="return confirm('Delete this item?')"
+                    >
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit">
+                        Delete
+                    </button>
+                    </form>
+
+                    <form
+                        method="POST"
+                        action="{{ route('drive.files.rename', $file->getId()) }}"
+                        style="display:inline;"
+                        >
+                        @csrf
+                        @method('PATCH')
+
+                        <input
+                            type="text"
+                            name="name"
+                            value="{{ $file->getName() }}"
+                            required
+                        >
+
+                        <button type="submit">
+                            Rename
+                        </button>
+                    </form>
+
+                    <form
+                        method="POST"
+                        action="{{ route('drive.files.share', $file->getId()) }}"
+                        style="display:inline;"
+                    >
+                        @csrf
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Google account email"
+                            required
+                        >
+
+                        <button type="submit">
+                            Share
+                        </button>
+                    </form>
                 </td>
 
             </tr>
